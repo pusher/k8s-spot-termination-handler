@@ -2,8 +2,6 @@ box: python:3-alpine
 build:
   steps:
     - pip-install
-push-to-ecr:
-  steps:
     - script:
         name: Install curl
         code: apk add --no-cache curl openssl ca-certificates
