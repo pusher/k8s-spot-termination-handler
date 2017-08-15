@@ -1,0 +1,24 @@
+box: python:3-alpine
+build:
+  steps:
+    - pip-install
+push-to-ecr:
+  steps:
+    - script:
+        name: Install curl
+        code: apk add --no-cache curl openssl ca-certificates
+    - script:
+        name: Install kubectl
+        code: |
+          curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+          chmod +x ./kubectl
+          mv ./kubectl /usr/local/bin/kubectl
+    - internal/docker-push:
+        aws-access-key: $AWS_ACCESS_KEY_ID
+        aws-secret-key: $AWS_SECRET_ACCESS_KEY
+        aws-region: us-east-1
+        aws-registry-id: $AWS_REGISTRY_ID
+        repository: 112622444253.dkr.ecr.us-east-1.amazonaws.com/pusher/spot-termination-handler
+        tag: $WERCKER_GIT_COMMIT, $WERCKER_GIT_BRANCH, latest
+        entrypoint: python
+        cmd: -u /docker-entrypoint.py
