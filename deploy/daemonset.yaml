@@ -1,0 +1,34 @@
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+  name: k8s-spot-termination-handler
+  namespace: kube-system
+  labels:
+    app: k8s-spot-termination-handler
+spec:
+  template:
+    metadata:
+      name: k8s-spot-termination-handler
+      labels:
+        app: k8s-spot-termination-handler
+    spec:
+      # Uncomment the following line if using RBAC
+      # serviceAccountName: k8s-spot-termination-handler
+      containers:
+      - name: k8s-spot-termination-handler
+        image: quay.io/pusher/k8s-spot-termination-handler:v0.1.0
+        imagePullPolicy: IfNotPresent
+        env:
+          - name: NODE_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: spec.nodeName
+        resources:
+          requests:
+            cpu: 5m
+            memory: 20Mi
+          limits:
+            cpu: 100m
+            memory: 100Mi
+      nodeSelector:
+        "node-role.kubernetes.io/spot-worker": "true"
