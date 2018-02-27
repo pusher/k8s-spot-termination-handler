@@ -23,10 +23,3 @@ build:
         tag: $WERCKER_GIT_COMMIT, $WERCKER_GIT_BRANCH, latest
         entrypoint: python
         cmd: -u /docker-entrypoint.py
-deploy-to-kubernetes:
-  steps:
-    - kubectl:
-        server: $KUBERNETES_MASTER
-        token: $KUBERNETES_TOKEN
-        insecure-skip-tls-verify: true
-        command: set image -n kube-system daemonset spot-termination-handler spot-termination-handler=112622444253.dkr.ecr.us-east-1.amazonaws.com/pusher/spot-termination-handler:$WERCKER_GIT_COMMIT
