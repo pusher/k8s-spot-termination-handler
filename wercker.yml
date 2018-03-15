@@ -15,8 +15,8 @@ build:
         name: Copy entrypoint
         code: cp docker-entrypoint.py /
     - internal/docker-push:
-        aws-access-key: $AWS_ACCESS_KEY_ID
-        aws-secret-key: $AWS_SECRET_ACCESS_KEY
+        aws-access-key: $AWS_CI_ACCESS_KEY_ID
+        aws-secret-key: $AWS_CI_SECRET_ACCESS_KEY
         aws-region: us-east-1
         aws-registry-id: $AWS_REGISTRY_ID
         repository: pusher/spot-termination-handler
