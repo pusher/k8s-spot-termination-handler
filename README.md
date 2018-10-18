@@ -20,9 +20,6 @@ node it is running on before the node is taken away by AWS.
 ## Usage
 
 ### Deploy to Kubernetes
-A docker image is available at `quay.io/pusher/k8s-spot-termination-handler`.
-These images are currently built on pushes to master. Releases will be tagged as and when releases are made.
-
 Sample Kubernetes manifests are available in the [deploy](deploy/) folder.
 
 To deploy in clusters using RBAC, please apply all of the manifests (Daemonset, ClusterRole, ClusterRoleBinding and ServiceAccount) in the [deploy](deploy/) folder but uncomment the `serviceAccountName` in the [Daemonset](deploy/daemonset.yaml).
