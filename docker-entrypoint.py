@@ -11,12 +11,14 @@ if __name__ == '__main__':
     node_name = getenv('NODE_NAME')
     detach_elb = getenv('DETACH_ELB', False)
 
-    session = botocore.session.get_session()
-    client = session.create_client('elb')
     instance_id = get(
         "http://169.254.169.254/latest/meta-data/instance-id"
     ).text
-    print('Watching for termination notice on node %s (instance_id: %s)' % (node_name, instance_id))
+    region = get('http://169.254.169.254/latest/meta-data/placement/availability-zone').text[:-1]
+
+    print('Watching for termination notice on node %s (region: %s, instance_id: %s)' % (node_name, region, instance_id))
+    session = botocore.session.get_session()
+    client = session.create_client('elb', region_name=region)
 
     counter = 0
     while(True):
