@@ -1,5 +1,8 @@
 FROM python:3-alpine
 
+ARG VERSION=undefined
+ENV VERSION ${VERSION}
+
 # Install curl and certificates
 RUN apk add --no-cache curl openssl ca-certificates
 
