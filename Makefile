@@ -12,9 +12,9 @@ all: lint
 lint:
 	@ echo "$(GREEN)Linting code$(NC)"
 	@ if [ ! $$(which flake8) ]; then echo "$(RED)flake8 not found - please install 'python -m pip install flake8'$(NC)"; exit 1; fi
-	flake8 docker-entrypoint.py --max-line-length=120 --max-complexity=8
+	flake8 docker_entrypoint.py --max-line-length=120 --max-complexity=8
 	@ if [ ! $$(which pylint) ]; then echo "$(RED)pylint not found - please install 'python -m pip install pylint'$(NC)"; exit 1; fi
-	pylint docker-entrypoint.py --max-line-length=120
+	pylint docker_entrypoint.py --max-line-length=120 --disable=C0330
 	@ echo
 
 .PHONY: docker-build

@@ -11,9 +11,9 @@ RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s
     chmod +x ./kubectl && \
     mv ./kubectl /usr/local/bin/kubectl
 
-COPY docker-entrypoint.py /
+COPY docker_entrypoint.py /
 COPY requirements.txt /
 
 RUN pip install -r /requirements.txt
 
-ENTRYPOINT ["python", "-u", "docker-entrypoint.py"]
+ENTRYPOINT ["python", "-u", "docker_entrypoint.py"]
