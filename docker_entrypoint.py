@@ -1,10 +1,14 @@
-from subprocess import check_output, call
-from requests import get
+'''Watches AWS metadata API for spot termination notices on spot nodes.
+Uses kubectl to drain nodes once their termination notice is present.'''
+
 from os import getenv
 from time import sleep
+from subprocess import call
+from requests import get
 
 
-if __name__ == '__main__':
+def main():
+    '''Watch for termination notices on spot instance nodes on AWS'''
     print('Starting up')
 
     node_name = getenv('NODE_NAME')
@@ -13,7 +17,7 @@ if __name__ == '__main__':
 
     counter = 0
 
-    while(True):
+    while True:
         response = get(
             "http://169.254.169.254/latest/meta-data/spot/termination-time"
         )
@@ -24,7 +28,7 @@ if __name__ == '__main__':
 
             print("Draining node: %s" % node_name)
             result = call(kube_command)
-            if (result == 0):
+            if result == 0:
                 print('Node Drain successful')
                 break
 
@@ -36,3 +40,7 @@ if __name__ == '__main__':
                       )
             counter += 5
             sleep(5)
+
+
+if __name__ == '__main__':
+    main()
