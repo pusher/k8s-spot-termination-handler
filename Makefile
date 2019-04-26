@@ -9,13 +9,21 @@ NC := \033[0m
 all: lint
 
 .PHONY: lint
-lint:
+lint: venv pip-install
 	@ echo "$(GREEN)Linting code$(NC)"
 	@ if [ ! $$(which flake8) ]; then echo "$(RED)flake8 not found - please install 'python -m pip install flake8'$(NC)"; exit 1; fi
-	flake8 docker_entrypoint.py --max-line-length=120 --max-complexity=8
+	. venv/bin/activate; flake8 docker_entrypoint.py --max-line-length=120 --max-complexity=8
 	@ if [ ! $$(which pylint) ]; then echo "$(RED)pylint not found - please install 'python -m pip install pylint'$(NC)"; exit 1; fi
-	pylint docker_entrypoint.py --max-line-length=120 --disable=C0330
+	. venv/bin/activate; pylint docker_entrypoint.py --max-line-length=120 --disable=C0330
 	@ echo
+
+venv:
+	python3 -m venv venv
+
+.PHONY: pip-install
+pip-install: venv
+	. venv/bin/activate ; \
+	pip3 install -r requirements.txt
 
 .PHONY: docker-build
 docker-build:
