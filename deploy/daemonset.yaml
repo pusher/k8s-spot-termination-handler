@@ -23,6 +23,9 @@ spec:
             valueFrom:
               fieldRef:
                 fieldPath: spec.nodeName
+          # Parameters to drain commmand can be adjusted
+          - name: DRAIN_PARAMETERS
+            value: '--grace-period=120 --force --ignore-daemonsets'
         resources:
           requests:
             cpu: 5m
