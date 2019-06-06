@@ -6,6 +6,7 @@ from time import sleep
 from subprocess import call
 from requests import get
 
+DEFAULT_DRAIN_PARAMETERS = ['--grace-period=120', '--force', '--ignore-daemonsets']
 
 def main():
     '''Watch for termination notices on spot instance nodes on AWS'''
@@ -27,6 +28,8 @@ def main():
             kube_command = ['kubectl', 'drain', node_name]
             if drain_parameters is not None:
                 kube_command += drain_parameters.split()
+            else:
+                kube_command += DEFAULT_DRAIN_PARAMETERS
             print("Draining node: %s" % node_name)
             result = call(kube_command)
             if result == 0:
