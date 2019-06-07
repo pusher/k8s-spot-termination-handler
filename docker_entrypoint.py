@@ -25,7 +25,6 @@ def main():
         )
         if response.status_code == 200:
             kube_command = ['kubectl', 'drain', node_name]
-
             kube_command += drain_parameters.split()
 
             print("Draining node: %s" % node_name)
