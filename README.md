@@ -41,6 +41,15 @@ To achieve this, add the following flag to your Kubelet:
 --node-labels="node-role.kubernetes.io/spot-worker=true"
 ```
 
+#### Configuration
+
+To define any custom parameters to the drain command you can use `DRAIN_PARAMETERS` environment property. If not defined, default parameters are `--grace-period=120 --force --ignore-daemonsets`.
+```yaml
+env:
+  - name: DRAIN_PARAMETERS
+    value: '--grace-period=120 --force --ignore-daemonsets --delete-local-data'
+```
+
 ## Related
 - [K8s Spot Rescheduler](https://github.com/pusher/k8s-spot-rescheduler): Move nodes from on-demand instances to spot instances when space is available.
 

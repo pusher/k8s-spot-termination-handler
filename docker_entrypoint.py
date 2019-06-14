@@ -13,6 +13,8 @@ def main():
 
     node_name = getenv('NODE_NAME')
 
+    drain_parameters = getenv('DRAIN_PARAMETERS', '--grace-period=120 --force --ignore-daemonsets')
+
     print('Watching for termination notice on node %s' % node_name)
 
     counter = 0
@@ -22,9 +24,8 @@ def main():
             "http://169.254.169.254/latest/meta-data/spot/termination-time"
         )
         if response.status_code == 200:
-            kube_command = ['kubectl', 'drain', node_name,
-                            '--grace-period=120', '--force',
-                            '--ignore-daemonsets']
+            kube_command = ['kubectl', 'drain', node_name]
+            kube_command += drain_parameters.split()
 
             print("Draining node: %s" % node_name)
             result = call(kube_command)
