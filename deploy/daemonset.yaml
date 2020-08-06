@@ -12,8 +12,8 @@ spec:
       labels:
         app: k8s-spot-termination-handler
     spec:
-      # Uncomment the following line if using RBAC
-      #serviceAccountName: k8s-spot-termination-handler
+      # comment the following line if not using RBAC
+      serviceAccountName: k8s-spot-termination-handler
       containers:
       - name: k8s-spot-termination-handler
         image: quay.io/cogentwebworks/k8s-spot-termination-handler:v0.3.1
