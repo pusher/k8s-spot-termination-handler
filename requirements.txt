@@ -1,4 +1,4 @@
-flake8==3.6.0
-pylint==2.3.1
-requests==2.21.0
-urllib3<1.25,>=1.21.1
+flake8==3.8.3
+pylint==2.5.3
+requests==2.24.0
+urllib3==1.25.10

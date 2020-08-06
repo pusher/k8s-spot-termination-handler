@@ -1,5 +1,5 @@
 VERSION := $(shell git describe --always --dirty --tags 2>/dev/null || echo "undefined")
-IMG ?= quay.io/pusher/k8s-spot-termination-handler
+IMG ?= quay.io/cogentwebworks/k8s-spot-termination-handler
 
 RED := \033[31m
 GREEN := \033[32m
