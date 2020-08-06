@@ -16,7 +16,7 @@ spec:
       serviceAccountName: k8s-spot-termination-handler
       containers:
       - name: k8s-spot-termination-handler
-        image: quay.io/cogentwebworks/k8s-spot-termination-handler:v0.3.0
+        image: quay.io/cogentwebworks/k8s-spot-termination-handler:v0.3.1
         imagePullPolicy: IfNotPresent
         env:
           - name: NODE_NAME
