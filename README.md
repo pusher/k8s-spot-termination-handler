@@ -1,5 +1,9 @@
 # K8s Spot Termination Handler
 
+> This repository has been **DEPRECATED** and we recommend using the official [AWS Node Termination
+> Handler](https://github.com/aws/aws-node-termination-handler) from AWS instead.
+> See #14 regarding ownership of this repository.
+
 ## Table of contents
 * [Introduction](#introduction)
 * [Usage](#usage)
