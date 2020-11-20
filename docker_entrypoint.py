@@ -31,7 +31,8 @@ def main():
             result = call(kube_command)
             if result == 0:
                 print('Node Drain successful')
-                break
+                # Sleep so we do not restart before drain evicts this pod. 
+                sleep(120)
 
         else:
             if counter == 60:
