@@ -1,14 +1,10 @@
-FROM python:3-slim-stretch
+FROM python:3-alpine
 
 ARG VERSION=undefined
 ENV VERSION ${VERSION}
 
 # Install curl and certificates
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    curl \
-    openssl \
-    ca-certificates \
-    && rm -rf /var/lib/apt/lists/*
+RUN apk add --no-cache curl openssl ca-certificates
 
 # Install kubectl
 RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && \

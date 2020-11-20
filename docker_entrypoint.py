@@ -32,7 +32,8 @@ def main():
             if result == 0:
                 print('Node Drain successful')
                 break
-
+                # Sleep so we do not restart before drain evicts this pod. 
+                sleep(120)
         else:
             if counter == 60:
                 counter = 0
