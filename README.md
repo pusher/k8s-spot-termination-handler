@@ -55,7 +55,7 @@ env:
 ```
 
 ## Related
-- [K8s Spot Rescheduler](https://github.com/pusher/k8s-spot-rescheduler): Move nodes from on-demand instances to spot instances when space is available.
+- [K8s Spot Rescheduler](https://github.com/pusher/k8s-spot-rescheduler): Move pods from on-demand instances to spot instances when space is available.
 
 ## Communication
 
